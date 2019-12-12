@@ -1,0 +1,82 @@
+/*
+Name of program: Pay Calculator
+Author/student’s name: Eric Williams
+Course name and number CPT307 - Data Structures & Algorithms
+Instructor’s name: Prof. Michael Hayden
+Date submitted: 2 December 2019
+ */
+package week1assignment;
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+public class PayCalculator {
+    
+    //format to show as currency
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+
+    private static double grossPay;
+    private static double overtimeHours;
+
+    public static void main(String[] args) {
+        
+        //deduction rates
+        double federalTax = .15;
+        double stateTax = .0392;
+        double medicare = .0145;
+        double socialSecurity = .062;
+        double unemploymentInsurance = .0007;
+        double totalTaxRate = federalTax + stateTax + medicare + socialSecurity + unemploymentInsurance;
+
+        //Enter Name
+        Scanner name = new Scanner(System.in);
+        String employeeName;
+
+        System.out.println("Enter employee's name:"); 
+        employeeName = name.nextLine();
+        
+        //Enter Payrate
+        Scanner payrate = new Scanner(System.in);
+        double employeePayrate;
+
+        System.out.println("Enter employees hourly payrate:"); 
+        employeePayrate = payrate.nextDouble();
+        
+        // Enter hours
+        Scanner hours = new Scanner(System.in);
+        int employeeHours;
+    
+        System.out.println("Enter # of hours worked:"); 
+        employeeHours = hours.nextInt();
+        
+        //Calculate Overtime
+        if (employeeHours >= 40) {
+            overtimeHours = employeeHours - 40;
+        }
+        else {
+            overtimeHours = 0;
+        }
+
+        //calculate gross income
+        if (employeeHours <= 40) {
+            grossPay = employeeHours * employeePayrate;
+        }
+        else {
+            grossPay = (overtimeHours * 1.5 * employeePayrate) + (40 * employeePayrate);
+        }
+       
+        //Calculate Total Deductions
+        double everyoneElsesCut = grossPay * totalTaxRate;
+        
+        //Calculate net pay
+        double netPay = grossPay - everyoneElsesCut;
+                
+        //final results
+        System.out.println("Name: " + employeeName);
+        System.out.println("Hourly pay: " + df2.format(employeePayrate));
+        System.out.println("Hours worked: " + employeeHours);
+        System.out.println("Overtime hours: " + overtimeHours);
+        System.out.println("Pretax/ Gross Pay: $" + df2.format(grossPay));
+        System.out.println("Taxes Paid: $" + df2.format(everyoneElsesCut));
+        System.out.println("Take-home/ Net Pay: $" + df2.format(netPay));
+    }
+}
