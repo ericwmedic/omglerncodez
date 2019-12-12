@@ -1,0 +1,42 @@
+package week2assignment;
+
+/*
+Name of program: week2assignment.SearchArray
+Author/student’s name: Eric Williams
+Course name and number: CPT307 Data Structures and Algorithms
+Instructor’s name: Prof. Michael Hayden
+Date submitted: 9 December 2019
+*/
+
+import java.util.Arrays;
+
+public class SearchArray {
+
+    public static void main(String[] args) {
+
+        // Defining the array:
+        Object arr[] = {5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70};
+
+        // Search values:
+        int searchValOne = 17;
+        int searchValTwo = 45;
+
+        //Returned values of search:
+        int returnedValOne = Arrays.binarySearch(arr, searchValOne);
+        int returnedValTwo = Arrays.binarySearch(arr, searchValTwo);
+      
+      /*Results displayed to user. If found, displays the position in the list.
+        If not found, displays "not found" 
+      */
+        if (returnedValOne >= 0) {
+            System.out.println("The value " + searchValOne + " was found at position: " + (returnedValOne + 1));
+        } else {
+            System.out.println("The value " + searchValOne + " was not found");
+        }
+        if (returnedValTwo >= 0) {
+            System.out.println("The value " + searchValTwo + " was found at position: " + (returnedValTwo + 1));
+        } else {
+            System.out.println("The value " + searchValTwo + " was not found");
+        }
+    }
+}
